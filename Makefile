@@ -92,7 +92,7 @@ all: environment unit docs
 # |___|_|\_| \_/ |___|_|_\\___/|_|\_|_|  |_|___|_|\_| |_|
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-tests: check-deps lint $(types)
+tests: check-deps $(types)
 
 $(types):
 	PARTNER_CODES_CONF_PATH=tests/$@/$@-test-config.yaml pipenv run nosetests ./tests/$@
@@ -173,7 +173,7 @@ aws-tail-logs:
 # run tests, build docs and the react app prior to building docker image
 # ......................................................................
 
-docker-image: lint develop unit html-docs docker-image-only
+docker-image: develop unit html-docs docker-image-only
 
 docker-push:
 	@printf "\033[38;5;197m$$(figlet PENDING TASK)\033[0m\n"
@@ -224,7 +224,7 @@ test: docker-tests
 
 
 deploy: clean
-	ansible-playbook -vvvv -i provisioning/inventory provisioning/playbook.yml
+	ansible-playbook -i provisioning/inventory provisioning/playbook.yml
 	make online-check
 
 
@@ -233,7 +233,7 @@ vault-edit:
 
 provision: clean
 	ansible-playbook -i provisioning/inventory provisioning/playbook.yml
-	ssh root@falcao.it /etc/cron.weekly/dehydrated
+	ssh partner.codes /etc/cron.weekly/dehydrated
 
 
 #  ___   _ _____ _   ___   _   ___ ___ ___

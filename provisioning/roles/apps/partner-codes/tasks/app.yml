@@ -1,0 +1,20 @@
+---
+- name: expose tools to path
+  lineinfile:
+    path: /etc/bash.bashrc
+    insertafter: '^export PATH'
+    regexp: "^export PATH.{{ item }}"
+    line: "export PATH={{ item }}:$PATH"
+
+  with_items:
+    - "{{ partner_codes_tools_dir }}"
+    - "{{ partner_codes_src_dir }}/tools/dehydrated"
+    - "{{ partner_codes_src_dir }}/tools/wait-for-it"
+
+- name: install partner-codes systemd logrotate
+  template:
+    src: "logrotate/logrotate.gunicorn.j2"
+    dest: "/etc/logrotate.d/partner-codes"
+    owner: root
+    group: root
+    mode: 644

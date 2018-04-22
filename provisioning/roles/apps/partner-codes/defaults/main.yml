@@ -1,0 +1,91 @@
+---
+partner_codes_system_users:
+  - username: chuck-norris
+    password: ":R0undh0u53@k1cK"
+    sudo: yes
+
+partner_codes_purge_archived_logs: no
+partner_codes_force_rotate_logs: no
+
+nginx_max_body_size: '4M'
+nginx_max_upload_size: '128M'
+
+butterfly_port: 6666
+partner_codes_app_http_port: 4242
+
+partner_codes_python_module_name: partner-codes
+partner_codes_relative_static_subpath: static/dist
+partner_codes_mysql_force_drop_db: no
+partner_codes_mysql_force_backup: no
+partner_codes_mysql_db: "partner-codesdb"
+partner_codes_mysql_user: "partner-codesadm"
+partner_codes_mysql_password: "unsafe-use-vault"
+partner_codes_mysql_root_password: "unsafe-use-vault"
+
+partner_codes_root_path: /srv/partner-codes
+partner_codes_backups_dir: "{{ partner_codes_root_path }}/backups"
+partner_codes_git_dir: "{{ partner_codes_root_path }}/gitea"
+partner_codes_log_dir: "{{ partner_codes_root_path }}/logs"
+partner_codes_private_dir: "{{ partner_codes_root_path }}/private"
+partner_codes_security_dir: "{{ partner_codes_private_dir }}/security"
+partner_codes_htpasswd_dir: "{{ partner_codes_security_dir }}/htpasswd"
+partner_codes_nginx_htpasswd_dir: "{{ partner_codes_htpasswd_dir }}/nginx"
+partner_codes_upload_dir: "{{ partner_codes_root_path }}/upload"
+partner_codes_src_dir: "{{ partner_codes_root_path }}/src"
+partner_codes_static_dir: "/var/www/partner-codes/{{ partner_codes_relative_static_subpath }}"
+partner_codes_tools_dir: "{{ partner_codes_root_path }}/tools"
+partner_codes_venv_dir: "{{ partner_codes_root_path }}/venv"
+partner_codes_tls_path: "{{ partner_codes_root_path }}/tls"
+partner_codes_www_root: "{{ partner_codes_root_path }}/www"
+partner_codes_tmp_dir: "{{ partner_codes_root_path }}/tmp"
+partner_codes_runtime_dir: "{{ partner_codes_root_path }}/run"
+partner_codes_public_dir: "{{ partner_codes_root_path }}/public"
+partner_codes_fragmento_public_dir: "{{ partner_codes_root_path }}/fragmento-public"
+partner_codes_butterfly_public_dir: "{{ partner_codes_root_path }}/butterfly-public"
+partner_codes_butterfly_code_dir: "{{ partner_codes_butterfly_public_dir }}/butterfly-docker/code"
+dehydrated_www_root: "{{ partner_codes_www_root }}/dehydrated"
+partner_codes_www_static_dir: "{{ partner_codes_www_root }}/static/dist"
+should_pull_docker_image_gitea: no
+partner_codes_nginx_users:
+  - fqdn: files.partner.codes
+    username: gabriel
+    password: "W3@k$eCRe7'z"
+
+partner_codes_python_module_dir: "{{ partner_codes_src_dir }}/{{ partner_codes_python_module_name }}"
+partner_codes_frontend_static_dist_path: "{{ partner_codes_python_module_dir }}/{{ partner_codes_relative_static_subpath }}"
+gunicorn_timeout: 180
+
+dehydrated:
+  - fqdn: partner.codes
+    subdomains:
+      - api
+      - blog
+      - cdn
+      - ci
+      - crypto
+      - docs
+      - func
+      - js
+      - lambda
+      - py
+      - python
+      - npm
+      - s
+      - share
+      - shell
+      - static
+      - stun
+      - turn
+      - www
+
+  - fqdn: dns.partner.codes
+  - fqdn: docker.partner.codes
+  - fqdn: gabriel.partner.codes
+  - fqdn: git.partner.codes
+  - fqdn: ipfs.partner.codes
+  - fqdn: jj.partner.codes
+  - fqdn: mail.partner.codes
+  - fqdn: pypi.partner.codes
+  - fqdn: tunnel.partner.codes
+  - fqdn: vpn.partner.codes
+  - fqdn: xmpp.partner.codes

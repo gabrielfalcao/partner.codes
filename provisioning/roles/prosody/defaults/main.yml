@@ -1,0 +1,5 @@
+prosody_users:
+  - jid:
+      username: gabriel
+      hostname: partner.codes
+    password: "unsafe1234"

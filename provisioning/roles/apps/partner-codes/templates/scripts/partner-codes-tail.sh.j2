@@ -1,0 +1,5 @@
+#!/bin/bash
+systemctl daemon-reload
+journalctl --vacuum-size=1
+journalctl -u nginx -u partner-codes-app --flush
+journalctl -u nginx -u partner-codes-app -f -n 10

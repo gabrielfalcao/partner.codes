@@ -1,0 +1,1 @@
+ssh python.clinic tail -100f /var/log/gunicorn/python-clinic-app.error.log

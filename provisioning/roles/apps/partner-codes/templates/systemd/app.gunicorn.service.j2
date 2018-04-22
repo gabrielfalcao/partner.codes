@@ -1,0 +1,33 @@
+[Unit]
+Description=partner-codes app
+After=network.target
+
+[Service]
+PIDFile={{ partner_codes_runtime_dir }}/pid
+User=root
+Group=root
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=partner-codes.web
+WorkingDirectory={{ partner_codes_tmp_dir }}
+ExecStart={{ partner_codes_venv_dir }}/bin/gunicorn \
+{% for key, value in application_env.items() %}-e {{ key }}='{{ value }}' \
+{% endfor %}
+--access-logfile /var/log/gunicorn/partner-codes-app.access.log \
+--capture-output \
+--chdir {{ partner_codes_src_dir }} \
+--enable-stdio-inheritance \
+--worker-class flask_sockets.worker \
+--error-logfile /var/log/gunicorn/partner-codes-app.error.log \
+--log-level debug \
+--pid {{ partner_codes_runtime_dir }}/pid \
+--pythonpath {{ partner_codes_src_dir }} \
+-b 127.0.0.1:{{ partner_codes_app_http_port }} \
+wsgi:application
+
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

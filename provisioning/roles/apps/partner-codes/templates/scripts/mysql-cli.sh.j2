@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+
+/usr/bin/mysql -u "{{ partner_codes_mysql_user }}" --password="{{ partner_codes_mysql_password }}" "{{ partner_codes_mysql_db }}" $*

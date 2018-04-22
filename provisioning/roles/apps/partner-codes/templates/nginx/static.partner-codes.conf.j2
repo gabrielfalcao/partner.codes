@@ -1,0 +1,32 @@
+server {
+    listen 443 ssl;
+    root {{ partner_codes_www_static_dir }};
+
+    gzip_static  on;
+
+    real_ip_header    X-Forwarded-For;
+    real_ip_recursive on;
+
+    server_name static.{{ partner_codes_root_hostname }};
+
+    limit_req zone=partner-codes burst=16 nodelay;
+
+    access_log /var/log/nginx/static.{{ partner_codes_root_hostname }}.accesstatic.log;
+    error_log /var/log/nginx/static.{{ partner_codes_root_hostname }}.error.log;
+
+    ssl_certificate {{ partner_codes_tls_path }}/certs/static.partner.codes/fullchain.pem;
+    ssl_certificate_key  {{ partner_codes_tls_path }}/certs/static.partner.codes/privkey.pem;
+
+    {% include "nginx/nginx.server.ssl.j2" %}
+
+    keepalive_requests 200;
+    keepalive_timeout 120s;
+    client_max_body_size 4M;
+    add_header Server 'Apache' always;
+    # add_header Strict-Transport-Security "max-age=31536000";
+
+
+    location / {
+        autoindex on;
+    }
+}

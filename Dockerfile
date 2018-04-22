@@ -33,8 +33,7 @@ WORKDIR /partner-codes/src
 COPY . /partner-codes/src
 
 RUN cp -f /partner-codes/src/container/config/* /partner-codes/config/
-RUN pipenv install --skip-lock --dev -r development.txt
-RUN pipenv install --skip-lock -r requirements.txt
+RUN pipenv install --skip-lock --dev
 RUN pipenv run python setup.py install
 
 RUN find /partner-codes/src/container/fs -exec touch {} \; && rsync -putavoz /partner-codes/src/container/fs/ /

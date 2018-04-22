@@ -1,0 +1,76 @@
+---
+
+- name: ensure partner-codes-related folders
+  file:
+    state: "directory"
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: 0775
+
+  with_items:
+    - "{{ partner_codes_backups_dir }}"
+    - "{{ partner_codes_private_dir }}"
+    - "{{ partner_codes_upload_dir }}"
+    - "{{ partner_codes_git_dir }}"
+    - "{{ partner_codes_log_dir }}"
+    - "{{ partner_codes_src_dir }}"
+    - "{{ partner_codes_src_dir }}/tools"
+    - "{{ partner_codes_tools_dir }}"
+    - "{{ partner_codes_venv_dir }}"
+    - "{{ partner_codes_tls_path }}"
+    - "{{ partner_codes_tmp_dir }}"
+    - "{{ partner_codes_runtime_dir }}"
+    - "{{ partner_codes_security_dir }}"
+    - "/var/log/gunicorn"
+    - "/etc/nginx/sites-available"
+    - "/etc/nginx/sites-enabled"
+
+
+- name: ensure folders owned by "www-data"
+  file:
+    state: "directory"
+    path: "{{ item }}"
+    owner: www-data
+    group: root
+    mode: 0775
+
+  with_items:
+    - "{{ partner_codes_static_dir }}"
+    - "{{ partner_codes_www_root }}"
+    - "{{ partner_codes_public_dir }}"
+    - "{{ partner_codes_htpasswd_dir }}"
+    - "{{ partner_codes_nginx_htpasswd_dir }}"
+
+
+- name: ensure log dirs
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0775
+    owner: root
+    group: root
+  notify:
+    - nginx permissions to partner-codes assets
+    - restart nginx
+
+  with_items:
+    - "{{ partner_codes_log_dir }}/gunicorn"
+    - "{{ partner_codes_log_dir }}/nginx"
+    - "{{ partner_codes_log_dir }}/workers"
+
+
+- name: grant www-data permission to nginx-related folders
+  file:
+    path: "{{ item }}"
+    state: "directory"
+    owner: www-data
+    group: www-data
+    mode: 0755
+
+  notify:
+    - nginx permissions to partner-codes assets
+    - restart nginx
+  with_items:
+    - "{{ partner_codes_www_root }}"
+    - "{{ partner_codes_www_static_dir }}"

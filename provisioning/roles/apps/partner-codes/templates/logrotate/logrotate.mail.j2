@@ -1,0 +1,13 @@
+/var/log/gunicorn/partner-codes-app*.log {
+        daily
+        missingok
+        rotate 52
+        compress
+        delaycompress
+        notifempty
+        create 640 nginx adm
+        sharedscripts
+        postrotate
+            service partner-codes-app restart
+        endscript
+}

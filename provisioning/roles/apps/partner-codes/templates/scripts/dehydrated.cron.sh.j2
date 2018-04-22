@@ -1,0 +1,8 @@
+#!/bin/bash
+
+{% include "scripts/dehydrated.backup.sh.j2" %}
+
+set -e
+run="{{ partner_codes_src_dir }}/tools/dehydrated/dehydrated"
+cd {{ partner_codes_tls_path }}
+${run} -c -f "{{ partner_codes_tls_path }}/config" --accept-terms
