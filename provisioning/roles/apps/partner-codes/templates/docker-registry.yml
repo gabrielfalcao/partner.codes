@@ -1,0 +1,19 @@
+version: 0.1
+log:
+  fields:
+    service: registry
+storage:
+  filesystem:
+    rootdirectory: "{{ partner_codes_private_dir }}/docker/registry"
+  delete:
+    enabled: true
+
+http:
+  addr: "{{ docker_registry_port }}"
+  headers:
+    X-Content-Type-Options: [nosniff]
+health:
+  storagedriver:
+    enabled: true
+    interval: 10s
+    threshold: 3

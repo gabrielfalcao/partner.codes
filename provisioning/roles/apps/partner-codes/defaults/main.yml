@@ -10,6 +10,7 @@ partner_codes_force_rotate_logs: no
 nginx_max_body_size: '4M'
 nginx_max_upload_size: '128M'
 
+docker_registry_port: 5000
 butterfly_port: 6666
 partner_codes_app_http_port: 4242
 

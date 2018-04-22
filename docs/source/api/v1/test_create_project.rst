@@ -34,7 +34,7 @@ Create a project
       Access-control-allow-origin: *
 
       {
-        "uuid": "9af06235-ff35-4bf6-bdd0-8226dac59359",
+        "uuid": "43094e71-f893-4dc8-8f28-3e2b146c49d8",
         "name": "my-awesome-project-1",
         "author": "norrischuck",
         "web_page_url": "https://partner.codes/projects/my-awesome-project-1"

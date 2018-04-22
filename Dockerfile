@@ -20,7 +20,7 @@ VOLUME ["/partner-codes/databases", "/partner-codes/logs"]
 ENV PYTHONPATH       /partner-codes/src:$PYTHONPATH
 
 ENV PARTNER_CODES_LOGLEVEL                       DEBUG
-ENV PARTNER_CODES_CONF_PATH                      /partner-codes./config/partner-codes.yaml
+ENV PARTNER_CODES_CONF_PATH                      /partner-codes/config/partner-codes.yaml
 ENV PARTNER_CODES_GENERATE_DOCS                  true
 
 RUN mkdir -p \

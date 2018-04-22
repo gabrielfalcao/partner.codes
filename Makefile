@@ -176,8 +176,7 @@ aws-tail-logs:
 docker-image: develop unit html-docs docker-image-only
 
 docker-push:
-	@printf "\033[38;5;197m$$(figlet PENDING TASK)\033[0m\n"
-	@printf "\033[38;5;176mcreate ECS-like deploy on DO\033[0m\n"
+	docker push $(docker_image)
 
 docker-image-only:
 	docker build . -t $(docker_image)
@@ -225,8 +224,6 @@ test: docker-tests
 
 deploy: clean
 	ansible-playbook -i provisioning/inventory provisioning/playbook.yml
-	make online-check
-
 
 vault-edit:
 	ansible-vault edit provisioning/partner-codes-vault.yml
