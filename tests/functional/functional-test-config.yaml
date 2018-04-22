@@ -1,0 +1,27 @@
+logging:
+  directory: ./logs/tests/functional
+  level: DEBUG
+
+aws:
+  create_missing_config: no
+
+dao:
+  file_system:
+    storage_path: ./_persisted-states
+
+  s3:
+    bucket_name: my-test-bucket
+    namespace: partner-codes-dao-prefix
+
+app:
+  SERVER_NAME: 'partner-codes.local'
+  BASE_URL: 'http://partner-codes.local'
+
+  SWAGGER_UI_DOC_EXPANSION: list
+  SWAGGER_UI_JSONEDITOR: yes
+  RESTPLUS_VALIDATE: yes
+
+  FORCE_SCHEMA_VALIDATION: no
+
+  TIMEZONE: 'America/New_York'
+  DATETIME_LOCALE: 'us'

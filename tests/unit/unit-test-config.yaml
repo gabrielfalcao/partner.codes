@@ -1,0 +1,13 @@
+logging:
+  directory: ./logs/tests/unit
+  level: DEBUG
+
+aws: null
+dao: null
+
+app:
+  SERVER_NAME: 'partner-codes.unit.tests'
+  BASE_URL: 'http://partner-codes.local'
+
+  TIMEZONE: 'America/New_York'
+  DATETIME_LOCALE: 'us'

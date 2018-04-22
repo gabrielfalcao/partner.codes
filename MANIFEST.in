@@ -1,0 +1,11 @@
+include *.yaml *.yml *.cfg *.py *.rst *.txt *.*
+include partner_codes/docs/*.*
+include partner_codes/docs/*/*.*
+recursive-include docs *.*
+recursive-include example *.*
+recursive-include tests *.*
+recursive-include partner_codes/web/schemas/api/v1 *.*
+recursive-include frontend/admin-app/build *.*
+recursive-include partner_codes/web/ui/static *.*
+recursive-include partner_codes/web/ui/templates *.*
+recursive-include partner_codes/docs *.*
